@@ -21,3 +21,10 @@ body {
     display: flex;
     flex-wrap: wrap;
 }
+
+#board div {
+    width: 180px;
+    height: 180px;
+    background: url("./img/hole-img.jpg");
+    background-size: cover;
+}
