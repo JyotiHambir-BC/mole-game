@@ -8,6 +8,7 @@ body {
     background-image: url(./img/hero.jpg);
     background-size: cover;
     text-align: center;
+
 }
 
 #board {
@@ -27,4 +28,25 @@ body {
     height: 180px;
     background: url("./img/hole-img.jpg");
     background-size: cover;
+    mix-blend-mode: multiply; /* make image background transparent */
+}
+
+#board div img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+
+    /* for lock image & not to drag outside the board */
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+}
+
+#time {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-left: 15px;
+    margin-right: 30px;
 }
