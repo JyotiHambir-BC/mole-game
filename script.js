@@ -1,5 +1,7 @@
 let currMoleHole;
 let currPlantHole;
+let moleInterval;
+let plantInterval;
 let score = 0;
 let gameOver = false;
 let timeLeft = 10; // 60 seconds
@@ -19,8 +21,8 @@ function setGame() {
         document.getElementById("board").appendChild(hole); // created the hole in every loop
     }
 
-    setInterval(setMole, 1000); // mole will appear in every 1 second
-    setInterval(setPlant, 2000); // plant will appear in every 2 second
+    moleInterval = setInterval(setMole, 1000); // mole will appear in every 1 second
+    plantInterval = setInterval(setPlant, 2000); // plant will appear in every 2 second
 }
 
 function getRandomTile() {
@@ -30,6 +32,7 @@ function getRandomTile() {
 
 function setMole() {
     if (gameOver) {
+        if (currMoleHole) currMoleHole.innerHTML = ""; // remove mole
         return;
     }
     if (currMoleHole){
@@ -49,6 +52,7 @@ function setMole() {
 
 function setPlant() {
     if (gameOver) {
+        if (currPlantHole) currPlantHole.innerHTML = ""; // remove plant
         return;
     }
     if (currPlantHole) {
@@ -81,20 +85,35 @@ function showScore() {
 }
 
 function showTime(){
+    if (gameOver) return;   
 
     let timeDisplay = document.getElementById("timer");
     let timer = setInterval(() => {
+        if (gameOver) {
+            clearInterval(timer); // stop time when it hits 0   
+            clearInterval(moleInterval); // stop mole
+            clearInterval(plantInterval); // stop plant 
+            
+            if (currMoleHole) currMoleHole.innerHTML = "";
+            if (currPlantHole) currPlantHole.innerHTML = "";
+
+            timeDisplay.textContent = "Oops.. Wrong Click... Try Again!";
+
+            return;
+        }
+
         if (timeLeft <= 0) {
-            clearInterval(timer); // stop time when it hits 0            
-            timeDisplay.textContent = `Time's Up!   Your Score is ${score}`;            
+            clearInterval(timer); // stop time when it hits 0   
+            clearInterval(moleInterval); // stop mole
+            clearInterval(plantInterval); // stop plant             
+            
+            if (currMoleHole) currMoleHole.innerHTML = "";
+            if (currPlantHole) currPlantHole.innerHTML = "";
+
+            timeDisplay.textContent = `Time's Up!   Your Score is ${score}`;                                 
         } else {
             timeDisplay.textContent = `Time : ${timeLeft} sec`;
             timeLeft--;
-        }
-        if (gameOver){
-            clearInterval(timer);
-            timeDisplay.textContent = "Oops.. Wrong Click... Try Again!";
-            gameOver = true;
         }
 
     }, 1000);
