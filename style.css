@@ -43,6 +43,19 @@ body {
     -webkit-user-select: none;
 }
 
+.btn {
+    margin: 15px;
+    padding: 15px 15px;
+    color: black;
+    background-color: orange;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #fff;
+}
+
 #time {
     display: flex;
     justify-content: space-between;

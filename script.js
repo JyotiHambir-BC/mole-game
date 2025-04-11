@@ -2,15 +2,43 @@ let currMoleHole;
 let currPlantHole;
 let moleInterval;
 let plantInterval;
+let timerInterval;
 let score = 0;
 let gameOver = false;
-let timeLeft = 10; // 60 seconds
+let timeLeft = 60; // 60 seconds
+
 
 window.onload = function(){
-    setGame();
-    showTime();
-    const best = localStorage.getItem("bestScore") || 0;
-    document.getElementById("best-Score").innerText = `Best Score : ${best}`;
+    document.getElementById("start-btn").addEventListener("click", startGame);
+    document.getElementById("reset-btn").addEventListener("click", resetGame);    
+};
+
+function startGame(){
+    resetGame(); // start fresh
+    setGame(); // set up the board
+    showTime(); // start the timer
+
+    moleInterval = setInterval(setMole, 1000);
+    plantInterval = setInterval(setPlant, 2000);
+}
+
+function resetGame(){    
+        clearInterval(moleInterval);
+        clearInterval(plantInterval);
+        clearInterval(timerInterval);
+    
+        document.getElementById("board").innerHTML = "";
+        document.getElementById("score").innerText = "0";
+        document.getElementById("timer").innerText = "Time : 60 sec";
+    
+        score = 0;
+        timeLeft = 60;
+        gameOver = false;
+        currMoleHole = null;
+        currPlantHole = null;
+    
+        const best = localStorage.getItem("bestScore") || 0;
+        document.getElementById("best-score").innerText = `Best Score: ${best}`;
 }
 
 function setGame() {
@@ -21,10 +49,7 @@ function setGame() {
         hole.id = i.toString();       
         hole.addEventListener("click", showScore);
         document.getElementById("board").appendChild(hole); // created the hole in every loop
-    }
-
-    moleInterval = setInterval(setMole, 1000); // mole will appear in every 1 second
-    plantInterval = setInterval(setPlant, 2000); // plant will appear in every 2 second
+    }    
 }
 
 function getRandomTile() {
@@ -90,9 +115,9 @@ function lastBestScore(currentScore){
     const best = localStorage.getItem("bestScore");
     if (!best || currentScore > parseInt(best)) {
         localStorage.setItem("bestScore", currentScore);
-        document.getElementById("best-Score").innerText = `Best Score : ${currentScore}`;
+        document.getElementById("best-score").innerText = `Best Score : ${currentScore}`;
     } else {
-        document.getElementById("best-Score").innerText = `Best Score : ${best}`;
+        document.getElementById("best-score").innerText = `Best Score : ${best}`;
     }
 }
 
@@ -100,7 +125,7 @@ function showTime(){
     if (gameOver) return;   
 
     let timeDisplay = document.getElementById("timer");
-    let timer = setInterval(() => {
+    timerInterval = setInterval(() => {
         if (gameOver) {
             clearInterval(timer); // stop time when it hits 0   
             clearInterval(moleInterval); // stop mole
@@ -110,7 +135,7 @@ function showTime(){
             if (currPlantHole) currPlantHole.innerHTML = "";
 
             timeDisplay.textContent = "Oops.. Wrong Click... Try Again!";
-
+            lastBestScore(score);
             return;
         }
 
