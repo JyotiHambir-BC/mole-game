@@ -9,6 +9,8 @@ let timeLeft = 10; // 60 seconds
 window.onload = function(){
     setGame();
     showTime();
+    const best = localStorage.getItem("bestScore") || 0;
+    document.getElementById("best-Score").innerText = `Best Score : ${best}`;
 }
 
 function setGame() {
@@ -79,8 +81,19 @@ function showScore() {
         score += 10;
         document.getElementById("score").innerText = score.toString(); // update the score
     }else if (this == currPlantHole) {
-        document.getElementById("score").innerText = "Game Over : " + score.toString();
         gameOver = true;
+        document.getElementById("score").innerText = "Game Over : " + score.toString();
+        lastBestScore(score);
+    }
+}
+
+function lastBestScore(currentScore){
+    const best = localStorage.getItem("bestScore");
+    if (!best || currentScore > parseInt(best)) {
+        localStorage.setItem("bestScore", currentScore);
+        document.getElementById("best-Score").innerText = `Best Score : ${currentScore}`;
+    } else {
+        document.getElementById("best-Score").innerText = `Best Score : ${best}`;
     }
 }
 
@@ -110,7 +123,11 @@ function showTime(){
             if (currMoleHole) currMoleHole.innerHTML = "";
             if (currPlantHole) currPlantHole.innerHTML = "";
 
-            timeDisplay.textContent = `Time's Up!   Your Score is ${score}`;                                 
+            timeDisplay.textContent = `Time's Up!   Your Score is ${score}`;  
+            gameOver = true;
+            
+            lastBestScore(score);
+            return;
         } else {
             timeDisplay.textContent = `Time : ${timeLeft} sec`;
             timeLeft--;
