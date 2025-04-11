@@ -42,7 +42,7 @@ function setMole() {
     }
 
     let mole = document.createElement("img");
-    mole.src = "./img/mole-img.jpg";
+    mole.src = "./img/mole-img1.png";
 
     let num = getRandomTile();
     if (currPlantHole && currPlantHole.id == num) {
@@ -62,8 +62,7 @@ function setPlant() {
     }
 
     let plant = document.createElement("img");
-    // plant.src = "./img/plant-img.jpg";
-    plant.src = "./img/plant1.png"
+    plant.src = "./img/plant2.png"
 
     let num = getRandomTile();
     if (currMoleHole && currMoleHole.id == num) {
