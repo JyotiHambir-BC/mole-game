@@ -2,10 +2,10 @@
 
 body {
     font-family: "Fredoka", sans-serif;
-    color: #fff;
+    color: blue;
     font-weight: 600;
     font-size: 25px;
-    background-image: url(./img/hero.jpg);
+    background-image: url(./img/hero.png);
     background-size: cover;
     text-align: center;
 
@@ -33,13 +33,22 @@ body {
 
 #board div img {
     width: 100px;
-    height: 100px;   
+    height: 100px;
+   
 
     /* for lock image & not to drag outside the board */
     user-select: none;
     -moz-user-select: none;
     -webkit-user-drag: none;
     -webkit-user-select: none;
+}
+
+h1 {
+    margin: auto;
+}
+
+#score {
+    color: orangered;
 }
 
 .btn {

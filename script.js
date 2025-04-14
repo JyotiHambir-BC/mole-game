@@ -148,7 +148,7 @@ function showTime(){
             if (currPlantHole) currPlantHole.innerHTML = "";
 
             timeDisplay.textContent = `Time's Up!   Your Score is ${score}`;  
-            gameOver = true;
+            // gameOver = true;
             
             lastBestScore(score);
             return;
