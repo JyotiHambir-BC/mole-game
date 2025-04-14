@@ -5,6 +5,12 @@
 ## Purpose of the Game and Targeted Audience
 "Catch the Mole" is a fun and interactive reaction-based game designed to test the player's speed and accuracy. The goal is to score as many points as possible by clicking on moles while avoiding the foxes, which end the game. It helps improve hand-eye coordination, reflexes, and focus through simple yet engaging gameplay.
 
+* 🎯 Target Audience - This game is suitable for:
+- Children looking for a fun and easy game to play.
+- Casual gamers of all ages seeking a quick and entertaining challenge.
+- People interested in improving their reaction time.
+- Beginners learning front-end development, as the project demonstrates core web technologies like HTML, CSS, and JavaScript in action.
+
 ![Mockup](documents/mock-up.png)
 
 ## User Experience (UX)
