@@ -26,9 +26,8 @@ body {
 #board div {
     width: 180px;
     height: 180px;
-    background: url("./img/hole-img.jpg");
+    background: url("./img/hole.png");
     background-size: cover;
-    mix-blend-mode: multiply; /* make image background transparent */
 }
 
 #board div img {
